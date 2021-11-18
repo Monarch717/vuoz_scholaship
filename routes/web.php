@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Scholar\ScholarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    return redirect('scholar/overview');
 });
+
+// Scholar role's Routing ========
+Route::prefix('scholar')->group(function () {
+    Route::get('overview', [ScholarController::class, 'index'])->name('overview_view');
+});
+
