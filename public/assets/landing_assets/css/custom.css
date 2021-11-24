@@ -1,0 +1,32 @@
+.btn-sign-in{
+    width: 150px;
+    background-color: #e91e63;
+}
+
+
+.btn--orange{
+    background-image: linear-gradient(to right,#ed8a4c 0,#e91e63 100%);
+}
+.btn--orange:after{
+
+    background-color: #e91e63;
+}
+.economy__block{
+    background-color: #e91e63;
+}
+
+/*.news-carousel__item{*/
+/*    height: 520px;*/
+/*}*/
+.register-page .card-signup {
+    border-radius: 6px;
+    box-shadow: 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
+    margin-bottom: 100px;
+    padding: 40px 0;
+    margin-top: 15vh;
+}
+
+.login-page .card-login .card-body{
+    padding: 0 10px!important;
+}
+

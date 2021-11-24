@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\Scholar\ScholarController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,13 +16,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+//Route::get('/', function () {
+//
+//    return redirect('scholar/overview');
+//});
 
-    return redirect('scholar/overview');
-});
+Route::get('/', [LandingController::class, 'index'])->name('landing_view');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('login', [ScholarController::class, 'loginView'])->name('login_view');
+Route::post('login', [AuthController::class, 'scholarLogin'])->name('scholar.login');
+Route::get('register', [ScholarController::class, 'registerView'])->name('register_view');
+Route::post('register', [AuthController::class, 'scholarRegister'])->name('scholar.register');
 
 // Scholar role's Routing ========
-Route::prefix('scholar')->group(function () {
-    Route::get('overview', [ScholarController::class, 'index'])->name('overview_view');
+Route::middleware('login_auth')->prefix('scholar')->group(function () {
+    Route::get('overview', [ScholarController::class, 'overviewView'])->name('overview_view');
+    Route::get('tracker', [ScholarController::class, 'trackerView'])->name('tracker_view');
+    Route::get('axies', [ScholarController::class, 'axiesView'])->name('axies_view');
+    Route::get('wallet', [ScholarController::class, 'walletView'])->name('wallet_view');
+    Route::get('payments', [ScholarController::class, 'paymentsView'])->name('payments_view');
+    Route::get('share', [ScholarController::class, 'shareView'])->name('share_view');
+    Route::get('settings', [ScholarController::class, 'settingsView'])->name('settings_view');
+    Route::get('faq', [ScholarController::class, 'faqView'])->name('faq_view');
 });
 
