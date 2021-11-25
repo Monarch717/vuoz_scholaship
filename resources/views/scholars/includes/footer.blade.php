@@ -3,23 +3,18 @@
         <nav class="float-left">
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="/">
                         VUOZ
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/#about">
                         About Us
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="https://medium.com/vuoz">
                         Blog
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Licenses
                     </a>
                 </li>
             </ul>

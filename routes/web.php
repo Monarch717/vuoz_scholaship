@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', [LandingController::class, 'index'])->name('landing_view');
+Route::post('landing_contact', [LandingController::class, 'contact'])->name('landing.contact');
+Route::post('landing_subscribe', [LandingController::class, 'subscribe'])->name('landing.subscribe');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('login', [ScholarController::class, 'loginView'])->name('login_view');

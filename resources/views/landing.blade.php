@@ -41,7 +41,6 @@
             s.parentNode.insertBefore(wf, s);
         })();
     </script>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <!-- Load other scripts
     ================================================== -->
     <script type="text/javascript">
@@ -65,6 +64,13 @@
 
 <div class="wrapper">
 
+    {{--    Message sent Alert--}}
+    @if(session()->has('errors'))
+        <div class="message_alert">
+            {{ session('errors')->first('msg') }}
+        </div>
+    @endif
+    {{--    Message sent alert end--}}
     <header class="header">
         <a href="/" class="logo">
             <img src="{{asset('assets/img/logo/red_logo.png')}}" width="200">
@@ -150,28 +156,33 @@
                     </p>
                     <ul class="social-list">
                         <li class="social-list__item">
+
                             <a href="https://twitter.com/vuoz_io" class="social-list__link" target="_blank">
-                                <i class="fontello-icon icon-twitter">&#xf309;</i>
+                                <img class="fontello-icon" src="{{asset('assets/landing_assets/img/twitter.png')}}"/>
+
                             </a>
                         </li>
                         <li class="social-list__item">
                             <a href="https://www.facebook.com/vuoz.io/" class="social-list__link" target="_blank">
-                                <i class="fontello-icon icon-facebook">&#xf30c;</i>
-                            </a>
-                        </li>
-                        <li class="social-list__item">
-                            <a href="https://medium.com/vuoz" class="social-list__link" target="_blank">
-                                <i class="fontello-icon fab fa-medium"></i>
+                                <img class="fontello-icon" src="{{asset('assets/landing_assets/img/facebook.png')}}"/>
+
                             </a>
                         </li>
                         <li class="social-list__item">
                             <a href="https://discord.gg/6yYm93badB" class="social-list__link" target="_blank">
-                                <i class="fontello-icon fab fa-discord"></i>
+                                <img class="fontello-icon" src="{{asset('assets/landing_assets/img/discord.png')}}"/>
+
+                            </a>
+                        </li>
+                        <li class="social-list__item">
+                            <a href="https://medium.com/vuoz" class="social-list__link" target="_blank">
+                                <img class="fontello-icon" src="{{asset('assets/landing_assets/img/medium.png')}}"/>
+
                             </a>
                         </li>
                         <li class="social-list__item">
                             <a href="https://instagram.com/vuoz.io" class="social-list__link" target="_blank">
-                                <i class="fontello-icon fab fa-instagram"></i>
+                                <img class="fontello-icon" src="{{asset('assets/landing_assets/img/instagram.png')}}"/>
                             </a>
                         </li>
                     </ul>
@@ -197,7 +208,7 @@
                         <div class="economy__block-content">
                             <div
                                 class="section-header section-header--white section-header--tire section-header--small-margin">
-                                <h4>VUOZ INFINITY GAME PLAY SAMPLE</h4>
+                                <h4>VUOZ DASHBOARD FEATURES</h4>
                             </div>
                             <ul>
                                 <li>
@@ -309,7 +320,7 @@
                     <div
                         class="section-header section-header--animated section-header--center section-header--medium-margin">
                         <h4>Awesome services</h4>
-                        <h2>Why it needs?</h2>
+                        <h2>Why you need VUOZ?</h2>
                     </div>
 
                     <div class="services__items">
@@ -319,7 +330,7 @@
                                      style="background-color: #e91e63; box-shadow: 0 0 51px #e91e63; box-shadow: 0 0 51px #e91e63;"></div>
                                 <img src="{{asset('assets/landing_assets/img/service-icon-1.svg')}}" alt="">
                                 <div class="service__title">
-                                    Mining Service
+                                    SLP Farming
                                 </div>
                             </div>
                             <div data-aos-delay="200" class="service">
@@ -327,7 +338,7 @@
                                      style="background-color: #fa8936; background-image: linear-gradient(-234deg, #ea9d64 0%, #fa8936 100%); box-shadow: 0 0 51px rgba(250, 137, 54, 0.74);"></div>
                                 <img src="{{asset('assets/landing_assets/img/service-icon-2.svg')}}" alt="">
                                 <div class="service__title">
-                                    Cryptoland App
+                                    Dashboard App
                                 </div>
                             </div>
                         </div>
@@ -337,7 +348,7 @@
                                      style="background-image: linear-gradient(-234deg, #6ae472 0%, #4bc253 100%); box-shadow: 0 0 51px rgba(75, 194, 83, 0.74);"></div>
                                 <img src="{{asset('assets/landing_assets/img/service-icon-3.svg')}}" alt="">
                                 <div class="service__title">
-                                    Blockchain
+                                    Blockchain Payment
                                 </div>
                             </div>
                             <div class="service">
@@ -455,11 +466,14 @@
                         <h4>Contact us</h4>
                         <h2>Get in Touch</h2>
                     </div>
-                    <form action="#" class="form contact-form" id="contact-form">
-                        <input type="text" name="Name" class="form__input" placeholder="Name">
-                        <input type="email" name="Email" class="form__input" placeholder="Email">
-                        <textarea name="Message" class="form__textarea" placeholder="Message"></textarea>
-                        <button class="form__btn btn btn--uppercase btn--orange"><span>Send message</span></button>
+                    <form action="{{route('landing.contact')}}" class="form contact-form" method="post"
+                    >
+                        @csrf
+                        <input type="text" name="name" class="form__input" placeholder="Name" required>
+                        <input type="email" name="email" class="form__input" placeholder="Email" required>
+                        <textarea name="message" class="form__textarea" placeholder="Message" required></textarea>
+                        <button type="submit" class="form__btn btn btn--uppercase btn--orange"><span>Send message</span>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -493,38 +507,47 @@
                             <li class="social-list__item">
 
                                 <a href="https://twitter.com/vuoz_io" class="social-list__link" target="_blank">
-                                    <i class="fontello-icon icon-twitter">&#xf309;</i>
+                                    <img class="fontello-icon"
+                                         src="{{asset('assets/landing_assets/img/twitter.png')}}"/>
+
                                 </a>
                             </li>
                             <li class="social-list__item">
                                 <a href="https://www.facebook.com/vuoz.io/" class="social-list__link" target="_blank">
-                                    <i class="fontello-icon icon-facebook">&#xf30c;</i>
+                                    <img class="fontello-icon"
+                                         src="{{asset('assets/landing_assets/img/facebook.png')}}"/>
+
                                 </a>
                             </li>
                             <li class="social-list__item">
                                 <a href="https://discord.gg/6yYm93badB" class="social-list__link" target="_blank">
-                                    <i class="fontello-icon fab fa-discord"></i>
+                                    <img class="fontello-icon"
+                                         src="{{asset('assets/landing_assets/img/discord.png')}}"/>
+
                                 </a>
                             </li>
                             <li class="social-list__item">
                                 <a href="https://medium.com/vuoz" class="social-list__link" target="_blank">
-                                    <i class="fontello-icon fab fa-medium"></i>
+                                    <img class="fontello-icon" src="{{asset('assets/landing_assets/img/medium.png')}}"/>
+
                                 </a>
                             </li>
                             <li class="social-list__item">
                                 <a href="https://instagram.com/vuoz.io" class="social-list__link" target="_blank">
-                                    <i class="fontello-icon fab fa-instagram"></i>
+                                    <img class="fontello-icon"
+                                         src="{{asset('assets/landing_assets/img/instagram.png')}}"/>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <form action="#" class="form subscribe" id="subscribe-form">
+                    <form action="{{route('landing.subscribe')}}" class="form subscribe" method="post">
+                        @csrf
                         <div class="form__title">Subscribe</div>
                         <div class="form__row">
                             <input type="email" name="subscribe_email" class="form__input" placeholder="Email">
-                            <button class="form__btn btn btn--uppercase btn--orange btn--small"><span>Send</span>
+                            <button type="submit" class="form__btn btn btn--uppercase btn--orange btn--small"><span>Send</span>
                             </button>
                         </div>
                     </form>

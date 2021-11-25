@@ -29,4 +29,13 @@
 .login-page .card-login .card-body{
     padding: 0 10px!important;
 }
-
+.message_alert{
+    position: fixed;
+    right: 0;
+    top: 11vh;
+    background: white;
+    padding: 10px;
+    border-left: 4px solid #e91e63;
+    width: 35%;
+    color: black;
+}
